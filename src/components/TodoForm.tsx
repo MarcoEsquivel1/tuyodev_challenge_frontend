@@ -1,6 +1,7 @@
-import { useModal } from "../hooks/useModal";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { useAppDispatch } from "../stores/taskStore";
+import { addTask } from "../stores/slices/taskSlice";
 
 //props: showModal boolean, toggleModal function
 interface TodoFormProps {
@@ -12,11 +13,21 @@ export const TodoForm = ({ showModal, toggleModal }: TodoFormProps) => {
     const [taskDescription, setTaskDescription] = useState('');
     const [taskDate, setTaskDate] = useState('');
 
-    
+    const dispatch = useAppDispatch()
 
     const saveTask = () => {
-        console.log(taskDescription)
-        console.log(taskDate)
+        if (taskDescription === '' || taskDate === '') {
+            alert('Please fill all the fields')
+            return
+        }
+        
+        dispatch(addTask({
+            id: Date.now() + Math.random(),
+            description: taskDescription,
+            date: taskDate,
+            completed: false
+        }))
+
         setTaskDate('')
         setTaskDescription('')
         toggleModal()
@@ -31,14 +42,14 @@ export const TodoForm = ({ showModal, toggleModal }: TodoFormProps) => {
                 <Form>
                     <Form.Group className="mb-3" controlId="taskDescription">
                         <Form.Label>Task description</Form.Label>
-                        <Form.Control type="text" placeholder="Some description" 
+                        <Form.Control required type="text" placeholder="Some description" 
                             onChange={
                                 e => setTaskDescription(e.target.value)
                                 }/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="taskDate">
                         <Form.Label>Task Date</Form.Label>
-                        <Form.Control type="date" placeholder="Enter Todo"
+                        <Form.Control required type="date" placeholder="Enter Todo"
                             onChange={ e => setTaskDate(e.target.value)
                         }/>
                     </Form.Group>
