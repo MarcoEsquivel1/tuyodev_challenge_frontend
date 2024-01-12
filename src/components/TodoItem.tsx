@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap";
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../stores/taskStore";
 import { deleteTask, setTaskCompleted } from "../stores/slices/taskSlice";
@@ -13,13 +13,13 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
 
     const dispatch = useAppDispatch();
 
-    const handleCompleteTask = () => {
+    const handleCompleteTask = useCallback(() => {
         dispatch(setTaskCompleted(task.id));
-    };
+    }, [dispatch, task.id]);
 
-    const deleteTaskHandle = (id: string) => {
-        dispatch(deleteTask(id));
-    };
+    const deleteTaskHandle = useCallback(() => {
+        dispatch(deleteTask(task.id));
+    }, [dispatch, task.id]);
 
     useEffect(() => {
         setCompletedTask(task.completed);
@@ -60,7 +60,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
                     className="btn btn-danger"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => deleteTaskHandle(task.id)}
+                    onClick={deleteTaskHandle}
                 >
                     <Icon icon="akar-icons:trash-can" className="fs-1" />
                 </AnimatedButton>
