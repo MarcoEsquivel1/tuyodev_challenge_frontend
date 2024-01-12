@@ -1,5 +1,5 @@
 export interface TaskInterface {
-    id: number;
+    id: string;
     description: string;
     date: string;
     completed: boolean;
@@ -12,12 +12,12 @@ export interface TaskFormInterface {
 
 export interface TaskProps {
     task: TaskInterface;
-    onDelete: (id: number) => void;
-    onToggle: (id: number) => void;
+    onDelete: (id: string) => void;
+    onToggle: (id: string) => void;
 }
 
 export interface TasksProps {
     tasks: TaskInterface[];
-    onDelete: (id: number) => void;
-    onToggle: (id: number) => void;
+    onDelete: (id: string) => void;
+    onToggle: (id: string) => void;
 }

@@ -9,7 +9,11 @@ export interface RootState {
 export const store: Store<RootState> = configureStore({
     reducer: {
         tasks: taskReducer
-    }
+    },
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 })
 
 export type AppDispatch = typeof store.dispatch

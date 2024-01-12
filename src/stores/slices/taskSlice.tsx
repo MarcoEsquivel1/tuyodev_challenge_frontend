@@ -5,7 +5,7 @@ import { TaskInterface } from "../../interfaces";
 export interface TaskState {
     tasks: TaskInterface[]
     addTask: (task: TaskInterface) => void
-    deleteTask: (id: number) => void
+    deleteTask: (id: string) => void
 }
 
 const initialState: TaskState = {
@@ -19,12 +19,12 @@ export const taskSlice = createSlice({
     initialState,
     reducers: {
         addTask: (state, action: PayloadAction<TaskInterface>) => {
+            //add task to the tasks array in state
             state.tasks.push(action.payload)
-            console.log('Task added')
+
         },
-        deleteTask: (state, action: PayloadAction<number>) => {
+        deleteTask: (state, action: PayloadAction<string>) => {
             state.tasks = state.tasks.filter(task => task.id !== action.payload)
-            console.log('Task deleted')
         },
     }
 })

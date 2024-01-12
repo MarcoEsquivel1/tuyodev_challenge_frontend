@@ -22,7 +22,7 @@ export const TodoForm = ({ showModal, toggleModal }: TodoFormProps) => {
         }
         
         dispatch(addTask({
-            id: Date.now() + Math.random(),
+            id: Date.now()+'_task',
             description: taskDescription,
             date: taskDate,
             completed: false
