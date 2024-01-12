@@ -1,6 +1,6 @@
 module.exports = {
     testEnvironment: "jest-environment-jsdom",
-    setupFiles: ['./jest.setup.cjs', "<rootDir>/support/setupTests.js"],
+    setupFiles: ['./jest.setup.cjs'],
     moduleNameMapper: {
         '^.+\\.svg$"': "jest-svg-transformer",
         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
