@@ -1,9 +1,9 @@
 import { Col } from "react-bootstrap";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../stores/taskStore";
-import { deleteTask } from "../stores/slices/taskSlice";
+import { deleteTask, setTaskCompleted } from "../stores/slices/taskSlice";
 import { TaskInterface } from "../interfaces";
 
 const AnimatedButton = motion.button;
@@ -14,17 +14,19 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
     const dispatch = useAppDispatch();
 
     const handleCompleteTask = () => {
-        setCompletedTask(!completedTask);
+        dispatch(setTaskCompleted(task.id));
     };
 
     const deleteTaskHandle = (id: string) => {
         dispatch(deleteTask(id));
     };
 
+    useEffect(() => {
+        setCompletedTask(task.completed);
+    }, [task.completed]);
+
     return (
-        <div
-            className="d-flex border mt-3 p-0"
-        >
+        <div className="d-flex border mt-3 p-0">
             <Col xs={3} className="p-0 m-0">
                 <AnimatedButton
                     style={{ width: "100%", height: "100%", padding: "0px", borderRadius: "0%" }}
@@ -66,6 +68,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
         </div>
     );
 };
+
 
 
 

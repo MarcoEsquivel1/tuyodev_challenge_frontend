@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Col, Row, Form } from "react-bootstrap";
 import { TodoForm } from "./TodoForm";
 import { useModal } from "../hooks/useModal";
@@ -33,11 +33,16 @@ export const TodoList = () => {
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
     useEffect(() => {
-        const filtered = tasks.filter((task) =>
-            task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            task.date.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredTasks(filtered);
+        const timerId = setTimeout(() => {
+            const filtered = tasks.filter(
+                (task) =>
+                    task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    task.date.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredTasks(filtered);
+        }, 700);
+
+        return () => clearTimeout(timerId);
     }, [searchTerm, tasks]);
 
     return (
@@ -82,4 +87,6 @@ export const TodoList = () => {
         </>
     );
 };
+
+
 
