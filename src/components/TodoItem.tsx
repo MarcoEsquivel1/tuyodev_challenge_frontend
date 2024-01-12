@@ -1,4 +1,4 @@
-import { Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -26,67 +26,52 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
     }, [task.completed]);
 
     return (
-        <div className="d-flex border mt-3 p-0">
-            <Col xs={3} className="p-0 m-0">
-                <AnimatedButton
-                    aria-label="Complete Task"
-                    style={{ width: "100%", height: "100%", padding: "0px", borderRadius: "0%" }}
-                    className={`btn ${completedTask ? 'btn-success' : 'btn-danger'}`}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={handleCompleteTask}
-                >
-                    <Icon icon={completedTask ? "material-symbols:check" : "lucide:x"} className="fs-1" />
-                </AnimatedButton>
-            </Col>
+        <Card className={`mt-3 ${completedTask ? 'border-success' : 'border-danger'} border-2 shadow position-relative`}>
+            <Card.Body className="p-2 ps-5">
+                <Row className="align-items-center">
+                    <Col md={8} className={` ${completedTask ? 'completed-text' : ''}`}>
+                        <h5
+                            aria-label="Task Description"
+                            className="fs-3 mb-3 mt-1"
+                            style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
+                        >
+                            {task.description}
+                        </h5>
+                        <p
+                            aria-label="Task Date"
+                            className='my-1'
+                            style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
+                        >
+                            {task.date}
+                        </p>
+                    </Col>
 
-            <Col xs={6} className="text-center p-0 m-0">
-                <motion.h5
-                    aria-label="Task Description"
-                    className={`my-3 ${completedTask ? 'completed-text' : ''}`}
-                    style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
-                >
-                    {task.description}
-                </motion.h5>
-                <motion.p
-                    aria-label="Task Date"
-                    className='my-2'
-                    style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
-                >
-                    {task.date}
-                </motion.p>
-            </Col>
+                    <Col md={4} className={`text-md-end mt-2 mt-md-0`}>
+                        <AnimatedButton
+                            aria-label="Complete Task"
+                            style={{ width: "50px", height: "50px", borderRadius: "10%" }}
+                            className={`btn ${completedTask ? 'btn-success' : 'btn-danger'} mx-0 mx-md-2 p-0`}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={handleCompleteTask}
+                        >
+                            <Icon icon={completedTask ? "material-symbols:check" : "lucide:x"} className="fs-3" />
+                        </AnimatedButton>
 
-            <Col xs={3} className="p-0 m-0">
-                <AnimatedButton
-                    aria-label="Delete Task"
-                    style={{ width: "100%", height: "100%", padding: "0px", borderRadius: "0%" }}
-                    className="btn btn-danger"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={deleteTaskHandle}
-                >
-                    <Icon icon="akar-icons:trash-can" className="fs-1" />
-                </AnimatedButton>
-            </Col>
-        </div>
+                        <AnimatedButton
+                            aria-label="Delete Task"
+                            style={{ width: "50px", height: "50px", borderRadius: "10%" }}
+                            className="btn btn-danger p-0 mx-2 "
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={deleteTaskHandle}
+                        >
+                            <Icon icon="akar-icons:trash-can" className="fs-3" />
+                        </AnimatedButton>
+                    </Col>
+                    <div className={`position-absolute top-0 bottom-0 start-0 ${completedTask ? 'bg-success' : 'bg-danger'}`} style={{ width: '25px', borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px' }}></div>
+                </Row>
+            </Card.Body>
+        </Card>
     );
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

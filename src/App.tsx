@@ -7,7 +7,7 @@ function App() {
 
   return (
 
-    <Container style={{ justifyContent: 'center' }}>
+    <Container style={{ justifyContent: 'center', minWidth: '250px' }}>
       <TodoList />
     </Container>
   )
