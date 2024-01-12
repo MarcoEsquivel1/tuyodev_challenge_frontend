@@ -41,21 +41,39 @@ export const TodoList = () => {
     return (
         <>
             <Row className="justify-content-md-center">
-                <h1 className="display-3 fst-italic text-center mb-5">Todo List</h1>
+                <motion.h1 
+                    initial={{ opacity: 1, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1}}
+                    transition={{ duration: 2, type: "spring", bounce: 0.5 }}
+                    exit={{ opacity: 0 }}
+                className="display-3 fst-italic text-center mb-5">Todo List</motion.h1>
             </Row>
             <Row>
                 <Col>
-                    <Button variant="primary" onClick={toggleModal}>
-                        Add Task
-                    </Button>
+                    <motion.div
+                        initial={{ opacity: 1, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1}}
+                        transition={{ duration: 2, type: "spring", bounce: 0.5 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <Button variant="primary" onClick={toggleModal}>
+                            Add Task
+                        </Button>
+                    </motion.div>
                 </Col>
                 <Col>
-                    <Form.Control
-                        type="text"
-                        placeholder="Search"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                    />
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 2, type: "spring", bounce: 0.5 }}
+                    >
+                        <Form.Control
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
+                    </motion.div>
                 </Col>
             </Row>
             <AnimatePresence>
