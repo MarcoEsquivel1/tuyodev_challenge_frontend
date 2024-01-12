@@ -41,7 +41,7 @@ export const TodoList = () => {
     return (
         <>
             <Row className="justify-content-md-center">
-                <h1 className="display-3 fst-italic text-center">Todo List</h1>
+                <h1 className="display-3 fst-italic text-center mb-5">Todo List</h1>
             </Row>
             <Row>
                 <Col>
