@@ -22,15 +22,13 @@ export const TodoList = () => {
                 <Col>
                 </Col>
             </Row>
+                
+            {tasks.map(task => (
             <Row>
-                <Col>
-                    <ul className="list-group">
-                        {tasks.map(task => (
-                            <TodoItem key={task.id} task={task}/>
-                        ))}
-                    </ul>
-                </Col>
+                <TodoItem key={task.id} task={task}/>
             </Row>
+            ))}
+                
             <TodoForm showModal={showModal} toggleModal={toggleModal}/>
         </>
     )
