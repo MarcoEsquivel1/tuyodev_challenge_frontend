@@ -1,8 +1,10 @@
-import { Col, ListGroupItem, Row, ToggleButton } from "react-bootstrap";
+import { Col, ListGroupItem, Row } from "react-bootstrap";
 import { TaskInterface } from "../interfaces";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const AnimatedButton = motion.button;
 
 export const TodoItem = ({ task }: { task: TaskInterface }) => {
     const [completedTask, setCompletedTask] = useState(task.completed);
@@ -37,15 +39,12 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
                         </Col>
 
                         <Col xs={'auto'} lg={'auto'} className="pr-0">
-                            <ToggleButton
-                                className="d-flex align-items-center justify-content-center"
+                            <AnimatedButton
                                 style={{ width: "35px", height: "35px", padding: "0px" }}
-                                id="toggle-check"
-                                type="checkbox"
-                                variant={completedTask ? "outline-success" : "outline-danger"}
-                                checked={completedTask}
-                                value={task.id}
-                                onChange={handleCompleteTask}
+                                className={`btn ${completedTask ? 'btn-success' : 'btn-outline-danger'}`}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={handleCompleteTask}
                             >
                                 <AnimatePresence>
                                     {completedTask && (
@@ -59,18 +58,18 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
-                            </ToggleButton>
+                            </AnimatedButton>
                         </Col>
 
                         <Col xs={'auto'} lg={'auto'} className="pl-0">
-                            <motion.button
+                            <AnimatedButton
                                 style={{ width: "35px", height: "35px", padding: "0px" }}
                                 className="btn btn-danger"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.9 }}
                             >
                                 <Icon icon="akar-icons:trash-can" className="fs-4" />
-                            </motion.button>
+                            </AnimatedButton>
                         </Col>
                     </Row>
                 </ListGroupItem>
@@ -78,6 +77,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
         </div>
     );
 };
+
 
 
 

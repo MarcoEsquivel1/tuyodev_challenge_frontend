@@ -42,7 +42,7 @@ export const TodoForm = ({ showModal, toggleModal }: TodoFormProps) => {
                 <Form>
                     <Form.Group className="mb-3" controlId="taskDescription">
                         <Form.Label>Task description</Form.Label>
-                        <Form.Control required type="text" placeholder="Some description" 
+                        <Form.Control required type="text" placeholder="Some description"
                             onChange={
                                 e => setTaskDescription(e.target.value)
                                 }/>
