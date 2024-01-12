@@ -29,6 +29,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
         <div className="d-flex border mt-3 p-0">
             <Col xs={3} className="p-0 m-0">
                 <AnimatedButton
+                    aria-label="Complete Task"
                     style={{ width: "100%", height: "100%", padding: "0px", borderRadius: "0%" }}
                     className={`btn ${completedTask ? 'btn-success' : 'btn-danger'}`}
                     whileHover={{ scale: 1.1 }}
@@ -41,12 +42,14 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
 
             <Col xs={6} className="text-center p-0 m-0">
                 <motion.h5
+                    aria-label="Task Description"
                     className={`my-3 ${completedTask ? 'completed-text' : ''}`}
                     style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
                 >
                     {task.description}
                 </motion.h5>
                 <motion.p
+                    aria-label="Task Date"
                     className='my-2'
                     style={{ textDecoration: completedTask ? 'line-through' : 'none' }}
                 >
@@ -56,6 +59,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
 
             <Col xs={3} className="p-0 m-0">
                 <AnimatedButton
+                    aria-label="Delete Task"
                     style={{ width: "100%", height: "100%", padding: "0px", borderRadius: "0%" }}
                     className="btn btn-danger"
                     whileHover={{ scale: 1.1 }}

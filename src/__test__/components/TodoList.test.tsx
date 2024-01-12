@@ -30,6 +30,5 @@ describe('TodoList Component', () => {
         userEvent.type(searchElement, 'test');
         await waitFor(() => expect(searchElement).toHaveValue('test'));
     });
-
     
 });
