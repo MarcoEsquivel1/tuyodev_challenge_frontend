@@ -1,9 +1,14 @@
 import { Button, Col, Row } from "react-bootstrap"
 import { TodoForm } from "./TodoForm"
 import { useModal } from "../hooks/useModal"
+import { RootState } from "../stores/taskStore"
+import { useSelector } from "react-redux"
+import { TodoItem } from "./TodoItem"
 
 export const TodoList = () => {
     const { showModal, toggleModal } = useModal()
+
+    const tasks = useSelector((state: RootState) => state.tasks.tasks)
 
     return (
         <>
@@ -15,6 +20,15 @@ export const TodoList = () => {
                     <Button variant="primary" onClick={toggleModal}>Add Task</Button>
                 </Col>
                 <Col>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <ul className="list-group">
+                        {tasks.map(task => (
+                            <TodoItem key={task.id} task={task}/>
+                        ))}
+                    </ul>
                 </Col>
             </Row>
             <TodoForm showModal={showModal} toggleModal={toggleModal}/>
