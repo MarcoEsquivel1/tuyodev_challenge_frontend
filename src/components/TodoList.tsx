@@ -1,10 +1,12 @@
-import { Button, Col, Row } from "react-bootstrap"
-import { TodoForm } from "./TodoForm"
-import { useModal } from "../hooks/useModal"
-import { RootState } from "../stores/taskStore"
-import { useSelector } from "react-redux"
-import { TodoItem } from "./TodoItem"
-import { AnimatePresence, motion } from "framer-motion"
+import React, { useState, useEffect } from "react";
+import { Button, Col, Row, Form } from "react-bootstrap";
+import { TodoForm } from "./TodoForm";
+import { useModal } from "../hooks/useModal";
+import { RootState } from "../stores/taskStore";
+import { useSelector } from "react-redux";
+import { TodoItem } from "./TodoItem";
+import { AnimatePresence, motion } from "framer-motion";
+import { TaskInterface } from "../interfaces";
 
 const animatedItem = {
     hidden: { opacity: 0, x: 50 },
@@ -17,14 +19,26 @@ const animatedItem = {
         },
     },
     exit: {
-        scaleY: 0, opacity: 0, zIndex: -1,
+        scaleY: 0,
+        opacity: 0,
+        zIndex: -1,
     },
 };
 
 export const TodoList = () => {
     const { showModal, toggleModal } = useModal();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredTasks, setFilteredTasks] = useState<TaskInterface[]>([]);
 
     const tasks = useSelector((state: RootState) => state.tasks.tasks);
+
+    useEffect(() => {
+        const filtered = tasks.filter((task) =>
+            task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            task.date.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredTasks(filtered);
+    }, [searchTerm, tasks]);
 
     return (
         <>
@@ -37,10 +51,17 @@ export const TodoList = () => {
                         Add Task
                     </Button>
                 </Col>
-                <Col></Col>
+                <Col>
+                    <Form.Control
+                        type="text"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </Col>
             </Row>
             <AnimatePresence>
-                {tasks.map((task) => (
+                {filteredTasks.map((task) => (
                     <motion.div
                         key={task.id}
                         variants={animatedItem}
@@ -61,3 +82,4 @@ export const TodoList = () => {
         </>
     );
 };
+
