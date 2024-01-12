@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap'
 function App() {
 
   return (
-    //container center content horizontally
+
     <Container style={{ justifyContent: 'center' }}>
       <TodoList />
     </Container>

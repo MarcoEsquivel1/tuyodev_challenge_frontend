@@ -18,7 +18,7 @@ export const TodoItem = ({ task }: { task: TaskInterface }) => {
             <motion.div
                 className={`d-flex justify-content-between align-items-center mt-2 ${completedTask ? 'completed' : ''}`}
                 initial={{ border: '1px solid red' }}
-                animate={{ border: completedTask ? '1px solid #28a745' : '1px solid red' }}
+                animate={{ borderColor: completedTask ? 'green' : 'red' }}
             >
                 <ListGroupItem className="w-100 border-0 position-relative">
                     <Row className="w-100 align-items-center">

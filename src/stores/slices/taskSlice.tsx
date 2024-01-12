@@ -19,7 +19,6 @@ export const taskSlice = createSlice({
     initialState,
     reducers: {
         addTask: (state, action: PayloadAction<TaskInterface>) => {
-            //add task to the tasks array in state
             state.tasks.push(action.payload)
 
         },

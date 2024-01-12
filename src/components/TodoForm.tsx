@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../stores/taskStore";
 import { addTask } from "../stores/slices/taskSlice";
 
-//props: showModal boolean, toggleModal function
+
 interface TodoFormProps {
     showModal: boolean
     toggleModal: () => void
