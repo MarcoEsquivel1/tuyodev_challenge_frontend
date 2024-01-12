@@ -80,7 +80,9 @@ export const TodoForm = ({ showModal, toggleModal }: TodoFormProps) => {
                     autohide
                     delay={5000}
                 >
-                    Please fill all the fields
+                    <p className="mb-0 fw-bold text-center">
+                        Please fill all the fields
+                    </p>
                 </Toast>
             </Modal.Body>
         </Modal>

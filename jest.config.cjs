@@ -1,5 +1,5 @@
 module.exports = {
-    testenvironment: "jest-environment-jsdom",
+    testEnvironment: "jest-environment-jsdom",
     setupFiles: ['./jest.setup.cjs'],
     moduleNameMapper: {
         '^.+\\.svg$"': "jest-svg-transformer",
